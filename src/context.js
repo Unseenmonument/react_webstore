@@ -3,16 +3,19 @@ import {storeProducts, detailProduct} from './data';
 
 const ProductContext = React.createContext();
 //Provider
-//Consuer
+//Consumer
 
 class ProductProvider extends Component {
 
     state ={
         products: [],
         detailProduct: detailProduct,
-        cart: [],
-        modalOpen: true,
+        cart: storeProducts,
+        modalOpen: false,
         modalProduct: detailProduct,
+        cartSubtotal: 0,
+        cartTax: 0,
+        cartTotal: 0,
     }
 
     componentDidMount(){
@@ -72,6 +75,24 @@ class ProductProvider extends Component {
         });
     };
 
+    increment = (id) =>{
+        console.log("here be the increment method, yar");
+    };
+
+    decrement = (id) =>{
+        console.log("here be the decrement method, yar");
+    };
+
+    removeItem = (id) =>{
+        console.log("item removed, yar");
+    };
+
+    clearCart = (id) =>{
+        console.log("all items removed, yar");
+    };
+
+
+
     render() {
         return (
             <ProductContext.Provider value={{
@@ -79,7 +100,11 @@ class ProductProvider extends Component {
                 handleDetail: this.handleDetail,
                 addToCart: this.addToCart,
                 openModal: this.openModal,
-                closeModal: this.closeModal
+                closeModal: this.closeModal,
+                increment: this.increment,
+                decrement: this.decrement,
+                removeItem: this.removeItem,
+                clearCart: this.clearCart
             }}>
                 {this.props.children}
             </ProductContext.Provider>
